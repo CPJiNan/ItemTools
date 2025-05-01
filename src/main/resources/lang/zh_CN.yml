@@ -1,0 +1,32 @@
+# 插件相关
+Plugin-Loading: '&7正在加载 &3Item&bTools&8&f... &8{0}'
+Plugin-Enabled: '&8[&3Item&bTools&8] &b信息 &8| &6插件加载完毕.'
+Plugin-Disable: '&8[&3Item&bTools&8] &b信息 &8| &6插件卸载完毕.'
+Plugin-Reloaded: '&8[&3Item&bTools&8] &b信息 &8| &6插件重载完毕.'
+
+# 命令帮助相关
+command-helper:
+  - '&7'
+  - '  &f&l{pluginId} &7v{pluginVersion}'
+  - '&7'
+  - '  &7命令: &f/{command} &8\[...\]'
+  - '  &7参数:'
+  - '{subCommands}'
+  - '&7'
+command-sub:
+  - '    &8- [&f{name}](h=/{command} {name} {usage}&8- &7{description};suggest=/{command} {name})'
+  - '      &7{description}'
+command-argument-missing:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7参数不足'
+  - '&8[&3&lItem&b&lTools&8] &7正确用法:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {name} {usage}&8- &7{description}'
+command-argument-wrong:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7参数有误'
+  - '&8[&3&lItem&b&lTools&8] &7正确用法:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {name} {usage}&8- &7{description}'
+command-argument-unknown:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7不存在'
+  - '&8[&3&lItem&b&lTools&8] &7你可能想要:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {similar} {usage}&8- &7{description}'
+command-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7只能由 &f玩家 &7执行'
+command-no-desc: '暂无描述'
