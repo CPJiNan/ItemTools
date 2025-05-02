@@ -46,4 +46,7 @@ interface ItemToolsService {
 
     /** 设置物品 NBT **/
     fun setNBT(item: ItemStack, key: String, value: Any?)
+
+    /** 物品是否为空气 **/
+    fun isAir(item: ItemStack?): Boolean
 }

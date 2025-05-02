@@ -1,5 +1,6 @@
 package com.github.cpjinan.plugin.itemtools
 
+import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
@@ -9,6 +10,7 @@ import taboolib.common.platform.PlatformFactory
 import taboolib.module.configuration.Configuration
 import taboolib.module.nms.getItemTag
 import taboolib.module.nms.itemTagReader
+import taboolib.platform.util.isAir
 import taboolib.platform.util.modifyLore
 import taboolib.platform.util.modifyMeta
 
@@ -91,6 +93,11 @@ object DefaultItemToolsService : ItemToolsService {
             set(key, value)
             write(item)
         }
+    }
+
+    /** 物品是否为空气 **/
+    override fun isAir(item: ItemStack?): Boolean {
+        return item == null || item.isAir || item.type == Material.AIR
     }
 
     @Awake(LifeCycle.CONST)

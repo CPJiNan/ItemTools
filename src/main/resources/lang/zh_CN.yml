@@ -4,6 +4,15 @@ Plugin-Enabled: '&8[&3Item&bTools&8] &b信息 &8| &6插件加载完毕.'
 Plugin-Disable: '&8[&3Item&bTools&8] &b信息 &8| &6插件卸载完毕.'
 Plugin-Reloaded: '&8[&3Item&bTools&8] &b信息 &8| &6插件重载完毕.'
 
+# 报错相关
+Error-Not-Player: "&c控制台不能执行此操作."
+Error-Air-In-Hand: "&c手中物品为空气."
+
+# 附魔相关
+Enchant-Check: "&8======== &f当前手中物品的附魔 &8========"
+Enchant-Set: "&7已设置手中物品的 &f{0} &7附魔等级为 &f{1} &7."
+Enchant-Not-Found: "&c未知的附魔类型 {0}."
+
 # 命令帮助相关
 command-helper:
   - '&7'
