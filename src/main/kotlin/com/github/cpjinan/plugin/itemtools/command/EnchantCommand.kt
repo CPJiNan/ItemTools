@@ -35,6 +35,11 @@ object EnchantCommand {
     @CommandBody(permission = "ItemTools.command.enchant.check", permissionDefault = PermissionDefault.OP)
     val check = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
+            if (sender.isConsole()) {
+                sender.sendLang("Error-Not-Player")
+                return@execute
+            }
+
             checkEnchant(sender, sender.cast<Player>().itemInHand)
         }
     }
@@ -44,6 +49,11 @@ object EnchantCommand {
     val set = subCommand {
         dynamic("enchant").int("level") {
             execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+
                 setEnchant(sender, sender.cast<Player>().itemInHand, context["enchant"], context.int("level"))
             }
         }
@@ -51,11 +61,6 @@ object EnchantCommand {
 
     /** 查看物品附魔 **/
     fun checkEnchant(sender: ProxyCommandSender, item: ItemStack) {
-        if (sender.isConsole()) {
-            sender.sendLang("Error-Not-Player")
-            return
-        }
-
         if (serviceAPI.isAir(item)) {
             sender.sendLang("Error-Air-In-Hand")
             return
@@ -69,11 +74,6 @@ object EnchantCommand {
 
     /** 设置物品附魔 **/
     fun setEnchant(sender: ProxyCommandSender, item: ItemStack, ench: String, level: Int) {
-        if (sender.isConsole()) {
-            sender.sendLang("Error-Not-Player")
-            return
-        }
-
         if (serviceAPI.isAir(item)) {
             sender.sendLang("Error-Air-In-Hand")
             return
