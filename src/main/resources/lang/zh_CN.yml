@@ -9,7 +9,7 @@ Error-Not-Player: "&c控制台不能执行此操作."
 Error-Air-In-Hand: "&c手中物品为空气."
 
 # NBT 相关
-NBT-Check: "&8======== &f当前手中物品的 NBT &8========"
+NBT-Check: "&7正在查看物品 &f{0} &7的 NBT"
 NBT-Set: "&7已设置手中物品的 NBT 节点 &f{0} &7的值为 &f{1} &7."
 NBT-Remove: "&7已移除手中物品的 NBT 节点 &f{0} &7."
 
@@ -18,7 +18,7 @@ Unbreakable-True: "&7已设置手中物品为无法破坏."
 Unbreakable-False: "&7已移除手中物品的无法破坏."
 
 # 附魔相关
-Enchant-Check: "&8======== &f当前手中物品的附魔 &8========"
+Enchant-Check: "&7正在查看物品 &f{0} &7的附魔"
 Enchant-Set: "&7已设置手中物品的 &f{0} &7附魔等级为 &f{1} &7."
 Enchant-Not-Found: "&c未知的附魔类型 {0}."
 

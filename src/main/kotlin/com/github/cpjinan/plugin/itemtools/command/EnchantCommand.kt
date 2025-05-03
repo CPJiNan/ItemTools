@@ -9,6 +9,7 @@ import taboolib.common.platform.command.*
 import taboolib.common.util.isConsole
 import taboolib.expansion.createHelper
 import taboolib.module.lang.sendLang
+import taboolib.module.nms.getName
 
 /**
  * ItemTools
@@ -66,7 +67,7 @@ object EnchantCommand {
             return
         }
 
-        sender.sendLang("Enchant-Check")
+        sender.sendLang("Enchant-Check", item.getName())
         serviceAPI.getEnchant(item).forEach { (ench, level) ->
             sender.sendMessage("  §7${ench}§8: §f$level")
         }

@@ -8,10 +8,7 @@ import taboolib.common.platform.command.*
 import taboolib.common.util.isConsole
 import taboolib.expansion.createHelper
 import taboolib.module.lang.sendLang
-import taboolib.module.nms.ItemTag
-import taboolib.module.nms.ItemTagList
-import taboolib.module.nms.ItemTagType
-import taboolib.module.nms.getItemTag
+import taboolib.module.nms.*
 
 /**
  * ItemTools
@@ -69,7 +66,7 @@ object NBTCommand {
             return
         }
 
-        sender.sendLang("NBT-Check")
+        sender.sendLang("NBT-Check", item.getName())
 
         fun getItemTag(tag: ItemTag, indent: String): List<String> {
             val itemTag = mutableListOf<String>()
