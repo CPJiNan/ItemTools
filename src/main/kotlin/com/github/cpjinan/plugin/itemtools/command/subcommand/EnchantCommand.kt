@@ -7,9 +7,9 @@ import org.bukkit.inventory.ItemStack
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.*
 import taboolib.common.util.isConsole
-import taboolib.expansion.createHelper
 import taboolib.module.lang.sendLang
 import taboolib.module.nms.getName
+import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
 /**
  * ItemTools
@@ -29,7 +29,7 @@ object EnchantCommand {
 
     @CommandBody
     val main = mainCommand {
-        createHelper()
+        createTabooLegacyStyleCommandHelper("enchant")
     }
 
     @Suppress("DEPRECATION")

@@ -4,6 +4,7 @@ import com.github.cpjinan.plugin.itemtools.ItemTools
 import com.github.cpjinan.plugin.itemtools.ItemToolsSettings
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.*
+import taboolib.module.lang.sendLang
 import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
 /**
@@ -51,6 +52,7 @@ object MainCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             ItemToolsSettings.settings.reload()
             ItemTools.api().getLanguage().reload()
+            sender.sendLang("Plugin-Reloaded")
         }
     }
 }

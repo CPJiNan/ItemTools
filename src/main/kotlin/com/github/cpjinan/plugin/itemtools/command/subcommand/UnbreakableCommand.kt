@@ -6,8 +6,8 @@ import org.bukkit.inventory.ItemStack
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.*
 import taboolib.common.util.isConsole
-import taboolib.expansion.createHelper
 import taboolib.module.lang.sendLang
+import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
 /**
  * ItemTools
@@ -27,7 +27,7 @@ object UnbreakableCommand {
     @Suppress("DEPRECATION")
     @CommandBody
     val main = mainCommand {
-        createHelper()
+        createTabooLegacyStyleCommandHelper("unbreakable")
         bool("bool") {
             execute<ProxyCommandSender> { sender, context, _ ->
                 if (sender.isConsole()) {
