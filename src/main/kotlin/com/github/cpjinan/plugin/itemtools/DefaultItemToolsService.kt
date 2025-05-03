@@ -71,9 +71,9 @@ object DefaultItemToolsService : ItemToolsService {
     }
 
     /** 设置物品无法破坏 **/
-    override fun setUnbreakable(item: ItemStack, isUnbreakable: Boolean) {
+    override fun setUnbreakable(item: ItemStack, bool: Boolean) {
         item.modifyMeta<ItemMeta> {
-            this.isUnbreakable = isUnbreakable
+            this.isUnbreakable = bool
         }
     }
 

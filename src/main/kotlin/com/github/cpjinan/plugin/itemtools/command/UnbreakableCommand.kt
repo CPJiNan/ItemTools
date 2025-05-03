@@ -28,28 +28,50 @@ object UnbreakableCommand {
     @CommandBody
     val main = mainCommand {
         createHelper()
-        bool("isUnbreakable") {
+        execute<ProxyCommandSender> { sender, _, _ ->
+            if (sender.isConsole()) {
+                sender.sendLang("Error-Not-Player")
+                return@execute
+            }
+
+            setUnbreakable(sender, sender.cast<Player>().itemInHand)
+        }
+        bool("bool") {
             execute<ProxyCommandSender> { sender, context, _ ->
                 if (sender.isConsole()) {
                     sender.sendLang("Error-Not-Player")
                     return@execute
                 }
 
-                setUnbreakable(sender, sender.cast<Player>().itemInHand, context.bool("isUnbreakable"))
+                setUnbreakable(sender, sender.cast<Player>().itemInHand, context.bool("bool"))
             }
         }
     }
 
     /** 设置物品无法破坏 **/
-    fun setUnbreakable(sender: ProxyCommandSender, item: ItemStack, isUnbreakable: Boolean) {
+    fun setUnbreakable(sender: ProxyCommandSender, item: ItemStack) {
         if (serviceAPI.isAir(item)) {
             sender.sendLang("Error-Air-In-Hand")
             return
         }
 
-        serviceAPI.setUnbreakable(item, isUnbreakable)
+        val bool = !serviceAPI.isUnbreakable(item)
+        serviceAPI.setUnbreakable(item, bool)
 
-        if (isUnbreakable) sender.sendLang("Unbreakable-True")
+        if (bool) sender.sendLang("Unbreakable-True")
+        else sender.sendLang("Unbreakable-False")
+    }
+
+    /** 设置物品无法破坏 **/
+    fun setUnbreakable(sender: ProxyCommandSender, item: ItemStack, bool: Boolean) {
+        if (serviceAPI.isAir(item)) {
+            sender.sendLang("Error-Air-In-Hand")
+            return
+        }
+
+        serviceAPI.setUnbreakable(item, bool)
+
+        if (bool) sender.sendLang("Unbreakable-True")
         else sender.sendLang("Unbreakable-False")
     }
 }
