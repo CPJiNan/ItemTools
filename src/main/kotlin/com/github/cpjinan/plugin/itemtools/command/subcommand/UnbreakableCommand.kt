@@ -1,4 +1,4 @@
-package com.github.cpjinan.plugin.itemtools.command
+package com.github.cpjinan.plugin.itemtools.command.subcommand
 
 import com.github.cpjinan.plugin.itemtools.ItemTools
 import org.bukkit.entity.Player
@@ -11,7 +11,7 @@ import taboolib.module.lang.sendLang
 
 /**
  * ItemTools
- * com.github.cpjinan.plugin.itemtools.command
+ * com.github.cpjinan.plugin.itemtools.command.subcommand
  *
  * @author 季楠
  * @since 2025/5/3 16:47

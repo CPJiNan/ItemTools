@@ -1,0 +1,50 @@
+package com.github.cpjinan.plugin.itemtools.command
+
+import com.github.cpjinan.plugin.itemtools.ItemTools
+import com.github.cpjinan.plugin.itemtools.ItemToolsSettings
+import taboolib.common.platform.ProxyCommandSender
+import taboolib.common.platform.command.*
+import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
+
+/**
+ * ItemTools
+ * com.github.cpjinan.plugin.itemtools.command
+ *
+ * @author 季楠
+ * @since 2025/5/4 00:14
+ */
+@CommandHeader(
+    name = "itemtools",
+    aliases = ["its"],
+    permission = "ItemTools.command.use",
+    permissionDefault = PermissionDefault.OP
+)
+object MainCommand {
+    @CommandBody
+    val main = mainCommand {
+        createTabooLegacyStyleCommandHelper()
+    }
+
+    @CommandBody(permission = "ItemTools.command.nbtedit.use", permissionDefault = PermissionDefault.OP)
+    val nbtedit = subCommand {
+
+    }
+
+    @CommandBody(permission = "ItemTools.command.unbreakable.use", permissionDefault = PermissionDefault.OP)
+    val unbreakable = subCommand {
+
+    }
+
+    @CommandBody(permission = "ItemTools.command.enchant.use", permissionDefault = PermissionDefault.OP)
+    val enchant = subCommand {
+
+    }
+
+    @CommandBody(permission = "ItemTools.command.reload.use", permissionDefault = PermissionDefault.OP)
+    val reload = subCommand {
+        execute<ProxyCommandSender> { sender, _, _ ->
+            ItemToolsSettings.settings.reload()
+            ItemTools.api().getLanguage().reload()
+        }
+    }
+}
