@@ -10,8 +10,8 @@ Error-Air-In-Hand: "&c手中物品为空气."
 
 # NBT 相关
 NBT-Check: "&8======== &f当前手中物品的 NBT &8========"
-NBT-Set: "&7已设置手中物品的 NBT 节点 &f{0} &7的值为 &f{1} &7！"
-NBT-Remove: "&7已移除手中物品的 NBT 节点 &f{0} &7！"
+NBT-Set: "&7已设置手中物品的 NBT 节点 &f{0} &7的值为 &f{1} &7."
+NBT-Remove: "&7已移除手中物品的 NBT 节点 &f{0} &7."
 
 # 无法破坏相关
 Unbreakable-True: "&7已设置手中物品为无法破坏."
