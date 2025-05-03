@@ -28,14 +28,6 @@ object UnbreakableCommand {
     @CommandBody
     val main = mainCommand {
         createHelper()
-        execute<ProxyCommandSender> { sender, _, _ ->
-            if (sender.isConsole()) {
-                sender.sendLang("Error-Not-Player")
-                return@execute
-            }
-
-            setUnbreakable(sender, sender.cast<Player>().itemInHand)
-        }
         bool("bool") {
             execute<ProxyCommandSender> { sender, context, _ ->
                 if (sender.isConsole()) {
