@@ -27,17 +27,23 @@ object MainCommand {
 
     @CommandBody(permission = "ItemTools.command.nbtedit.use", permissionDefault = PermissionDefault.OP)
     val nbtedit = subCommand {
-
+        execute<ProxyCommandSender> { sender, _, _ ->
+            sender.performCommand("itemtools:nbtedit")
+        }
     }
 
     @CommandBody(permission = "ItemTools.command.unbreakable.use", permissionDefault = PermissionDefault.OP)
     val unbreakable = subCommand {
-
+        execute<ProxyCommandSender> { sender, _, _ ->
+            sender.performCommand("itemtools:unbreakable")
+        }
     }
 
     @CommandBody(permission = "ItemTools.command.enchant.use", permissionDefault = PermissionDefault.OP)
     val enchant = subCommand {
-
+        execute<ProxyCommandSender> { sender, _, _ ->
+            sender.performCommand("itemtools:enchant")
+        }
     }
 
     @CommandBody(permission = "ItemTools.command.reload.use", permissionDefault = PermissionDefault.OP)
