@@ -7,7 +7,6 @@ import org.bukkit.inventory.meta.ItemMeta
 import taboolib.common.LifeCycle
 import taboolib.common.platform.Awake
 import taboolib.common.platform.PlatformFactory
-import taboolib.module.configuration.Configuration
 import taboolib.module.nms.getItemTag
 import taboolib.module.nms.itemTagReader
 import taboolib.platform.util.isAir
@@ -78,13 +77,8 @@ object DefaultItemToolsService : ItemToolsService {
     }
 
     /** 获取物品 NBT **/
-    override fun getNBT(item: ItemStack): Configuration {
-        return Configuration.loadFromString(item.getItemTag().toJson())
-    }
-
-    /** 获取物品 NBT **/
     override fun getNBT(item: ItemStack, key: String): Any? {
-        return getNBT(item)[key]
+        return item.getItemTag().getDeep(key)?.unsafeData()
     }
 
     /** 设置物品 NBT **/

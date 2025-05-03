@@ -1,7 +1,6 @@
 package com.github.cpjinan.plugin.itemtools
 
 import org.bukkit.inventory.ItemStack
-import taboolib.module.configuration.Configuration
 
 /**
  * ItemTools
@@ -37,9 +36,6 @@ interface ItemToolsService {
 
     /** 设置物品无法破坏 **/
     fun setUnbreakable(item: ItemStack, bool: Boolean)
-
-    /** 获取物品 NBT **/
-    fun getNBT(item: ItemStack): Configuration
 
     /** 获取物品 NBT **/
     fun getNBT(item: ItemStack, key: String): Any?
