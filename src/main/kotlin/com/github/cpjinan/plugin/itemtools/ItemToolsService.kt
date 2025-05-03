@@ -36,7 +36,7 @@ interface ItemToolsService {
     fun isUnbreakable(item: ItemStack): Boolean
 
     /** 设置物品无法破坏 **/
-    fun setUnbreakable(item: ItemStack, isUnbreakable: Boolean)
+    fun setUnbreakable(item: ItemStack, bool: Boolean)
 
     /** 获取物品 NBT **/
     fun getNBT(item: ItemStack): Configuration
