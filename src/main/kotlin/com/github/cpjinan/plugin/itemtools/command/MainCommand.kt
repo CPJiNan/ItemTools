@@ -26,14 +26,22 @@ object MainCommand {
         createTabooLegacyStyleCommandHelper()
     }
 
-    @CommandBody(permission = "ItemTools.command.loreedit.use", permissionDefault = PermissionDefault.OP)
+    @CommandBody(
+        aliases = ["lore"],
+        permission = "ItemTools.command.loreedit.use",
+        permissionDefault = PermissionDefault.OP
+    )
     val loreedit = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             sender.performCommand("itemtools:loreedit")
         }
     }
 
-    @CommandBody(permission = "ItemTools.command.nbtedit.use", permissionDefault = PermissionDefault.OP)
+    @CommandBody(
+        aliases = ["nbt"],
+        permission = "ItemTools.command.nbtedit.use",
+        permissionDefault = PermissionDefault.OP
+    )
     val nbtedit = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             sender.performCommand("itemtools:nbtedit")
@@ -47,7 +55,11 @@ object MainCommand {
         }
     }
 
-    @CommandBody(permission = "ItemTools.command.enchant.use", permissionDefault = PermissionDefault.OP)
+    @CommandBody(
+        aliases = ["ench"],
+        permission = "ItemTools.command.enchant.use",
+        permissionDefault = PermissionDefault.OP
+    )
     val enchant = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             sender.performCommand("itemtools:enchant")
