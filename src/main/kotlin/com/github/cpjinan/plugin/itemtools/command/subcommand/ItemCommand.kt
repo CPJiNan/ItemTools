@@ -144,6 +144,7 @@ object ItemCommand {
         config[id] = null
         managerAPI.saveItemToConfig(item, config, id)
         config.saveToFile(file)
+        managerAPI.reload()
         sender.sendLang("Item-Save", path, id)
     }
 }

@@ -25,9 +25,7 @@ import taboolib.library.configuration.ConfigurationSection
 import taboolib.library.xseries.XMaterial
 import taboolib.module.configuration.Configuration
 import taboolib.module.configuration.Type
-import taboolib.module.nms.getItemTag
-import taboolib.module.nms.getName
-import taboolib.module.nms.itemTagReader
+import taboolib.module.nms.*
 import taboolib.platform.util.buildItem
 import taboolib.platform.util.giveItem
 import top.maplex.arim.tools.folderreader.readFolderWalkConfig
@@ -287,6 +285,14 @@ object DefaultItemToolsManager : ItemToolsManager {
     }
 
     private fun nbt(item: ItemStack, config: Configuration, path: String) {
+        fun ItemTagData.getValue(): Any {
+            return when (val data = unsafeData()) {
+                is ItemTag -> data.entries.associate { it.key to it.value.getValue() }
+                is ItemTagList -> data.map { it.getValue() }
+                else -> data
+            }
+        }
+
         item.getItemTag().entries.filter {
             it.key !in listOf(
                 "display", "Damage", "ench", "Enchantments",
@@ -294,7 +300,7 @@ object DefaultItemToolsManager : ItemToolsManager {
                 "BlockEntityTag", "Potion", "SkullOwner"
             )
         }.forEach {
-            config["$path.NBT.${it.key}"] = it.value.unsafeData()
+            config["$path.NBT.${it.key}"] = it.value.getValue()
         }
     }
 
