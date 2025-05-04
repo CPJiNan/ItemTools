@@ -45,6 +45,21 @@ object LoreCommand {
         }
     }
 
+    @Suppress("DEPRECATION")
+    @CommandBody(permission = "ItemTools.command.loreedit.add", permissionDefault = PermissionDefault.OP)
+    val add = subCommand {
+        dynamic("element") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+
+                addLore(sender, sender.cast<Player>().itemInHand, context["element"])
+            }
+        }
+    }
+
     /** 查看物品 Lore **/
     fun checkLore(sender: ProxyCommandSender, item: ItemStack) {
         if (NBTCommand.serviceAPI.isAir(item)) {
@@ -59,5 +74,15 @@ object LoreCommand {
             sender.sendMessage("&7${index + 1} &8| &r$element".colored())
         }
         sender.sendMessage("")
+    }
+
+    /** 新增物品 Lore **/
+    fun addLore(sender: ProxyCommandSender, item: ItemStack, element: String) {
+        if (NBTCommand.serviceAPI.isAir(item)) {
+            sender.sendLang("Error-Air-In-Hand")
+            return
+        }
+
+        serviceAPI.addLore(item, element)
     }
 }

@@ -9,7 +9,7 @@ Error-Not-Player: "&c控制台不能执行此操作."
 Error-Air-In-Hand: "&c手中物品为空气."
 
 # Lore 相关
-Lore-Check: "&7正在查看物品 &f{0} &7的 Lore"
+Lore-Check: "&7正在查看物品 &f{0} &7的 Lore&8:"
 Lore-Add: "&7已新增 Lore &f{0} &7至手中物品！"
 Lore-Remove: "&7已移除手中物品的第 &f{0} &7行 Lore！"
 Lore-Set: "&7已设置手中物品的第 &f{0} &7行 Lore 为 &f{1} &7！"
@@ -17,7 +17,7 @@ Lore-Insert: "&7已在手中物品第 &f{0} &7行与第 &f{1} &7行 Lore 之间�
 Lore-Clear: "&7已清除手中物品的全部 Lore!"
 
 # NBT 相关
-NBT-Check: "&7正在查看物品 &f{0} &7的 NBT"
+NBT-Check: "&7正在查看物品 &f{0} &7的 NBT&8:"
 NBT-Set: "&7已设置手中物品的 NBT 节点 &f{0} &7的值为 &f{1} &7."
 NBT-Remove: "&7已移除手中物品的 NBT 节点 &f{0} &7."
 
@@ -26,7 +26,7 @@ Unbreakable-True: "&7已设置手中物品为无法破坏."
 Unbreakable-False: "&7已移除手中物品的无法破坏."
 
 # 附魔相关
-Enchant-Check: "&7正在查看物品 &f{0} &7的附魔"
+Enchant-Check: "&7正在查看物品 &f{0} &7的附魔&8:"
 Enchant-Set: "&7已设置手中物品的 &f{0} &7附魔等级为 &f{1} &7."
 Enchant-Not-Found: "&c未知的附魔类型 {0}."
 
@@ -93,6 +93,8 @@ command-loreedit-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7
 command-loreedit-no-desc: '暂无描述'
 command-loreedit-subCommands-check-description: '查看手中物品 Lore'
 command-loreedit-subCommands-check-usage: ''
+command-loreedit-subCommands-add-description: '为手中物品新增 Lore'
+command-loreedit-subCommands-add-usage: '&8<&7Lore 内容&8>'
 command-nbtedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'
