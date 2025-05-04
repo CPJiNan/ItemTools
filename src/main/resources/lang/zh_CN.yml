@@ -3,6 +3,14 @@ Plugin-Loading: '&7正在加载 &3Item&bTools&8&f... &8{0}'
 Plugin-Enabled: '&8[&3Item&bTools&8] &b信息 &8| &6插件加载完毕.'
 Plugin-Disable: '&8[&3Item&bTools&8] &b信息 &8| &6插件卸载完毕.'
 Plugin-Reloaded: '&8[&3Item&bTools&8] &b信息 &8| &6插件重载完毕.'
+Plugin-Update:
+  - '&r===============&r[&e&l插件更新&r]&r=============='
+  - '&r| &r插件 &6ItemTools &7=>'
+  - '&r| &b◈ &r发现了一个新的插件版本！'
+  - '&r| &b◈ &r最新版本: {0}'
+  - '&r| &b◈ &r当前版本: {1}'
+  - '&r| &b◈ &r查看详情: 704109949'
+  - '&r===============&r[&e&l插件更新&r]&r=============='
 
 # 报错相关
 Error-Not-Player: "&c控制台不能执行此操作."

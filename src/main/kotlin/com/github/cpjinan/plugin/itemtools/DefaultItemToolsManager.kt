@@ -55,7 +55,9 @@ object DefaultItemToolsManager : ItemToolsManager {
         }
         // 导入 MythicMobs 物品
         val mythicAPI = ItemTools.api().getHook().getMythicMobs()
-        if (mythicAPI.isPluginEnabled()) item.putAll(mythicAPI.getItemList().mapKeys { "MythicMobs:${it.key}" })
+        if (mythicAPI.isPluginEnabled() && "MythicMobs" in ItemToolsSettings.plugin) {
+            item.putAll(mythicAPI.getItemList().mapKeys { "MythicMobs:${it.key}" })
+        }
     }
 
     /** 给予玩家物品 **/

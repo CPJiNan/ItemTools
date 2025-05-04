@@ -40,4 +40,8 @@ object ItemToolsSettings {
     /** 调试模式 **/
     @ConfigNode("Options.Debug")
     var debug = false
+
+    /** 调试模式 **/
+    @ConfigNode("Item.Plugin")
+    var plugin = listOf<String>()
 }

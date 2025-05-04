@@ -12,3 +12,9 @@ Options:
   Send-Metrics: true
   # 启用调试模式
   Debug: false
+
+# 物品设置
+Item:
+  # 物品库插件
+  Plugin:
+    - MythicMobs

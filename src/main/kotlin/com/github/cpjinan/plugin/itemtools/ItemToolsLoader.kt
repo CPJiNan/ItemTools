@@ -1,6 +1,7 @@
 package com.github.cpjinan.plugin.itemtools
 
 import com.github.cpjinan.plugin.itemtools.ItemTools.plugin
+import com.github.cpjinan.plugin.itemtools.network.ItemToolsUpdate
 import com.github.cpjinan.plugin.itemtools.utils.LoggerUtils
 import taboolib.common.LifeCycle
 import taboolib.common.platform.Awake
@@ -51,6 +52,8 @@ object ItemToolsLoader {
             ""
         )
         console().sendLang("Plugin-Enabled")
+        if (ItemToolsSettings.checkUpdate) ItemToolsUpdate.sendConsoleUpdate()
+        ItemToolsUpdate.sendConsoleNotice()
     }
 
     @Awake(LifeCycle.DISABLE)
