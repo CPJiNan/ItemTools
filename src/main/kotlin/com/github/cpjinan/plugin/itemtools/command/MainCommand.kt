@@ -27,6 +27,16 @@ object MainCommand {
     }
 
     @CommandBody(
+        permission = "ItemTools.command.item.use",
+        permissionDefault = PermissionDefault.OP
+    )
+    val item = subCommand {
+        execute<ProxyCommandSender> { sender, _, _ ->
+            sender.performCommand("itemtools:item")
+        }
+    }
+
+    @CommandBody(
         aliases = ["lore"],
         permission = "ItemTools.command.loreedit.use",
         permissionDefault = PermissionDefault.OP
@@ -48,7 +58,10 @@ object MainCommand {
         }
     }
 
-    @CommandBody(permission = "ItemTools.command.unbreakable.use", permissionDefault = PermissionDefault.OP)
+    @CommandBody(
+        permission = "ItemTools.command.unbreakable.use",
+        permissionDefault = PermissionDefault.OP
+    )
     val unbreakable = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             sender.performCommand("itemtools:unbreakable")

@@ -16,7 +16,6 @@ import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
  */
 @CommandHeader(
     name = "item",
-    aliases = ["itsitem"],
     permission = "ItemTools.command.item.use",
     permissionDefault = PermissionDefault.OP
 )

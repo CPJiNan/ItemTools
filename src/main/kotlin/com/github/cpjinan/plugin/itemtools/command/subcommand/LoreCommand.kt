@@ -20,7 +20,7 @@ import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
  */
 @CommandHeader(
     name = "loreedit",
-    aliases = ["itsloreedit", "lore"],
+    aliases = ["lore"],
     permission = "ItemTools.command.loreedit.use",
     permissionDefault = PermissionDefault.OP
 )

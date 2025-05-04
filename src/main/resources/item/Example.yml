@@ -11,5 +11,5 @@ Apple:
     Glow: true
     Unbreakable: true
   NBT:
-    物品NBT修改:
-      支持多级NBT节点: XXX
+    ItemTools:
+      CustomNBT: XXX

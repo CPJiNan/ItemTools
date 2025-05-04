@@ -20,7 +20,7 @@ import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
  */
 @CommandHeader(
     name = "enchant",
-    aliases = ["itsenchant", "ench"],
+    aliases = ["ench"],
     permission = "ItemTools.command.enchant.use",
     permissionDefault = PermissionDefault.OP
 )
