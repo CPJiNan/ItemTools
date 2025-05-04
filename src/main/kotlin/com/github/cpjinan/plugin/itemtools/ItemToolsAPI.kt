@@ -11,6 +11,9 @@ interface ItemToolsAPI {
     /** 获取业务逻辑接口 **/
     fun getService(): ItemToolsService
 
+    /** 获取物品库接口 **/
+    fun getManager(): ItemToolsManager
+
     /** 获取插件挂钩接口 **/
     fun getHook(): ItemToolsHook
 

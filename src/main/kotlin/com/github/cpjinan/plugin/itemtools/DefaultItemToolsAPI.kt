@@ -13,6 +13,9 @@ class DefaultItemToolsAPI : ItemToolsAPI {
     /** 业务逻辑接口 **/
     var localService = PlatformFactory.getAPI<ItemToolsService>()
 
+    /** 物品库接口 **/
+    var localManager = PlatformFactory.getAPI<ItemToolsManager>()
+
     /** 插件挂钩接口 **/
     var localHook = PlatformFactory.getAPI<ItemToolsHook>()
 
@@ -22,6 +25,11 @@ class DefaultItemToolsAPI : ItemToolsAPI {
     /** 获取业务逻辑接口 **/
     override fun getService(): ItemToolsService {
         return localService
+    }
+
+    /** 获取物品库接口 **/
+    override fun getManager(): ItemToolsManager {
+        return localManager
     }
 
     /** 获取插件挂钩接口 **/
