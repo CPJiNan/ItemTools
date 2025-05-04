@@ -60,6 +60,36 @@ object LoreCommand {
         }
     }
 
+    @Suppress("DEPRECATION")
+    @CommandBody(permission = "ItemTools.command.loreedit.remove", permissionDefault = PermissionDefault.OP)
+    val remove = subCommand {
+        int("index") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+
+                removeLore(sender, sender.cast<Player>().itemInHand, context.int("index"))
+            }
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @CommandBody(permission = "ItemTools.command.loreedit.set", permissionDefault = PermissionDefault.OP)
+    val set = subCommand {
+        int("index").dynamic("element") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+
+                setLore(sender, sender.cast<Player>().itemInHand, context.int("index"), context["element"])
+            }
+        }
+    }
+
     /** 查看物品 Lore **/
     fun checkLore(sender: ProxyCommandSender, item: ItemStack) {
         if (NBTCommand.serviceAPI.isAir(item)) {
@@ -84,5 +114,38 @@ object LoreCommand {
         }
 
         serviceAPI.addLore(item, element)
+        sender.sendLang("Lore-Add", element)
+    }
+
+    /** 移除物品 Lore **/
+    fun removeLore(sender: ProxyCommandSender, item: ItemStack, index: Int) {
+        if (NBTCommand.serviceAPI.isAir(item)) {
+            sender.sendLang("Error-Air-In-Hand")
+            return
+        }
+
+        if (index !in 1..serviceAPI.getLore(item).size) {
+            sender.sendLang("Lore-Index-Not-Found", index, serviceAPI.getLore(item).size)
+            return
+        }
+
+        serviceAPI.removeLore(item, index - 1)
+        sender.sendLang("Lore-Remove", index)
+    }
+
+    /** 设置物品 Lore **/
+    fun setLore(sender: ProxyCommandSender, item: ItemStack, index: Int, element: String) {
+        if (NBTCommand.serviceAPI.isAir(item)) {
+            sender.sendLang("Error-Air-In-Hand")
+            return
+        }
+
+        if (index !in 1..serviceAPI.getLore(item).size) {
+            sender.sendLang("Lore-Index-Not-Found", index, serviceAPI.getLore(item).size)
+            return
+        }
+
+        serviceAPI.setLore(item, index - 1, element)
+        sender.sendLang("Lore-Set", index, element)
     }
 }

@@ -15,6 +15,7 @@ Lore-Remove: "&7已移除手中物品的第 &f{0} &7行 Lore！"
 Lore-Set: "&7已设置手中物品的第 &f{0} &7行 Lore 为 &f{1} &7！"
 Lore-Insert: "&7已在手中物品第 &f{0} &7行与第 &f{1} &7行 Lore 之间插入内容 &f{2} &7!"
 Lore-Clear: "&7已清除手中物品的全部 Lore!"
+Lore-Index-Not-Found: "&c未找到指定的行数 {0} ,手中物品只有 {1} 行 Lore."
 
 # NBT 相关
 NBT-Check: "&7正在查看物品 &f{0} &7的 NBT&8:"
@@ -95,6 +96,10 @@ command-loreedit-subCommands-check-description: '查看手中物品 Lore'
 command-loreedit-subCommands-check-usage: ''
 command-loreedit-subCommands-add-description: '为手中物品新增 Lore'
 command-loreedit-subCommands-add-usage: '&8<&7Lore 内容&8>'
+command-loreedit-subCommands-remove-description: '为手中物品移除 Lore'
+command-loreedit-subCommands-remove-usage: '&8<&7Lore 内容&8>'
+command-loreedit-subCommands-set-description: '为手中物品设置 Lore'
+command-loreedit-subCommands-set-usage: '&8<&7Lore 内容&8>'
 command-nbtedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'
