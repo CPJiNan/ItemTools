@@ -10,10 +10,10 @@ Error-Air-In-Hand: "&c手中物品为空气."
 
 # 物品相关
 Item-List: "&7正在查看物品列表&8:"
-Item-Get: "&7已获取 &f{1} &7个 物品 &f{0} &7至手中."
+Item-Get: "&7已获取 &f{1} &7个 物品 &f{0} &7至背包中."
 Item-Give: "&7已给予 &f{2} 玩家 &f{1} &7个 物品 &f{0} &7."
 Item-Save: "&7已将手中物品保存至 &f{0} &7中的 &f{1} &7."
-Item-Not-Found: "&c未找到指定物品."
+Item-Not-Found: "&c未找到指定物品 {0}."
 
 # Lore 相关
 Lore-Check: "&7正在查看物品 &f{0} &7的 Lore&8:"
@@ -103,6 +103,10 @@ command-item-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7只�
 command-item-no-desc: '暂无描述'
 command-item-subCommands-list-description: '查看物品列表'
 command-item-subCommands-list-usage: ''
+command-item-subCommands-get-description: '获取物品'
+command-item-subCommands-get-usage: '&8<&7物品 ID&8> &8[&7数量&8]'
+command-item-subCommands-give-description: '给予玩家物品'
+command-item-subCommands-give-usage: '&8<&7玩家名称&8> &8<&7物品 ID&8> &8[&7数量&8]'
 command-loreedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'

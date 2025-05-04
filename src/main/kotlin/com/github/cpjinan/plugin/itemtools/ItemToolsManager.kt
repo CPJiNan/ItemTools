@@ -1,5 +1,6 @@
 package com.github.cpjinan.plugin.itemtools
 
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import taboolib.library.configuration.ConfigurationSection
 
@@ -15,6 +16,18 @@ interface ItemToolsManager {
 
     /** 重载物品配置 **/
     fun reload()
+
+    /** 给予玩家物品 **/
+    fun giveItem(player: Player, id: String, amount: Int)
+
+    /** 获取指定物品 **/
+    fun getItem(id: String): ItemStack?
+
+    /** 获取物品列表 **/
+    fun getItems(): HashMap<String, ItemStack>
+
+    /** 获取物品名称列表 **/
+    fun getItemNames(): List<String>
 
     /** 从配置文件构建物品 **/
     fun buildItem(config: ConfigurationSection): ItemStack

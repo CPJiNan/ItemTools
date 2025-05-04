@@ -7,6 +7,7 @@ import org.bukkit.DyeColor
 import org.bukkit.block.banner.Pattern
 import org.bukkit.block.banner.PatternType
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
@@ -25,6 +26,7 @@ import taboolib.library.xseries.XMaterial
 import taboolib.module.configuration.Type
 import taboolib.module.nms.itemTagReader
 import taboolib.platform.util.buildItem
+import taboolib.platform.util.giveItem
 import top.maplex.arim.tools.folderreader.readFolderWalkConfig
 import java.io.File
 
@@ -49,6 +51,20 @@ object DefaultItemToolsManager : ItemToolsManager {
             }
         }
     }
+
+    /** 给予玩家物品 **/
+    override fun giveItem(player: Player, id: String, amount: Int) {
+        player.giveItem(getItems()[id], amount)
+    }
+
+    /** 获取指定物品 **/
+    override fun getItem(id: String): ItemStack? = getItems()[id]
+
+    /** 获取物品列表 **/
+    override fun getItems(): HashMap<String, ItemStack> = item
+
+    /** 获取物品名称列表 **/
+    override fun getItemNames(): List<String> = getItems().keys.toList()
 
     /** 从配置文件构建物品 **/
     override fun buildItem(config: ConfigurationSection): ItemStack {

@@ -84,6 +84,7 @@ object MainCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             ItemToolsSettings.settings.reload()
             ItemTools.api().getLanguage().reload()
+            ItemTools.api().getManager().reload()
             sender.sendLang("Plugin-Reloaded")
         }
     }

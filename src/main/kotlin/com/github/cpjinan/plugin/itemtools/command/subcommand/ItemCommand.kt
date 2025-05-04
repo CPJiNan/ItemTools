@@ -1,8 +1,10 @@
 package com.github.cpjinan.plugin.itemtools.command.subcommand
 
 import com.github.cpjinan.plugin.itemtools.ItemTools
+import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.*
+import taboolib.common.util.isConsole
 import taboolib.module.lang.sendLang
 import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
@@ -33,12 +35,67 @@ object ItemCommand {
         }
     }
 
+    @CommandBody(permission = "ItemTools.command.item.get", permissionDefault = PermissionDefault.OP)
+    val get = subCommand {
+        dynamic("id") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                getItem(sender, context["id"])
+            }
+        }.int("amount") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                getItem(sender, context["id"], context.int("amount"))
+            }
+        }
+    }
+
+    @CommandBody(permission = "ItemTools.command.item.give", permissionDefault = PermissionDefault.OP)
+    val give = subCommand {
+        player("player").dynamic("id") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                giveItem(sender, context.player("player").cast(), context["id"])
+            }
+        }.int("amount") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                giveItem(sender, context.player("player").cast(), context["id"], context.int("amount"))
+            }
+        }
+    }
+
     /** 查看物品列表 **/
     fun listItem(sender: ProxyCommandSender) {
         sender.sendMessage("")
         sender.sendLang("Item-List")
         sender.sendMessage("")
-        sender.sendMessage(managerAPI.item.keys.joinToString("§7, ") { "§f$it" })
+        sender.sendMessage(managerAPI.getItemNames().joinToString("§7, ") { "§f$it" })
         sender.sendMessage("")
+    }
+
+    /** 获取物品 **/
+    fun getItem(sender: ProxyCommandSender, id: String, amount: Int = 1) {
+        if (sender.isConsole()) {
+            sender.sendLang("Error-Not-Player")
+            return
+        }
+
+        if (id !in managerAPI.item) {
+            sender.sendLang("Item-Not-Found", id)
+            return
+        }
+
+        managerAPI.giveItem(sender.cast(), id, amount)
+
+        sender.sendLang("Item-Get", id, amount)
+    }
+
+    /** 给予物品 **/
+    fun giveItem(sender: ProxyCommandSender, player: Player, id: String, amount: Int = 1) {
+        if (id !in managerAPI.item) {
+            sender.sendLang("Item-Not-Found", id)
+            return
+        }
+
+        managerAPI.giveItem(player, id, amount)
+
+        sender.sendLang("Item-Give", id, amount, player.name)
     }
 }
