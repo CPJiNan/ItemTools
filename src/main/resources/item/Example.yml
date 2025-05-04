@@ -1,0 +1,15 @@
+Apple:
+  Type: APPLE
+  Display: §bBad Apple!!
+  Lore:
+    - §fMr.Black's Apple
+  Enchantments:
+    DAMAGE_ALL: 10
+  Options:
+    HideFlags:
+      - HIDE_ENCHANTS
+    Glow: true
+    Unbreakable: true
+  NBT:
+    物品NBT修改:
+      支持多级NBT节点: XXX

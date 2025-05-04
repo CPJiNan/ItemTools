@@ -11,6 +11,11 @@ import taboolib.library.configuration.ConfigurationSection
  * @since 2025/5/4 15:06
  */
 interface ItemToolsManager {
-    /** 从配置构建物品 **/
-    fun getItemFromConfig(config: ConfigurationSection): ItemStack
+    val item: HashMap<String, ItemStack>
+
+    /** 重载物品配置 **/
+    fun reload()
+
+    /** 从配置文件构建物品 **/
+    fun buildItem(config: ConfigurationSection): ItemStack
 }

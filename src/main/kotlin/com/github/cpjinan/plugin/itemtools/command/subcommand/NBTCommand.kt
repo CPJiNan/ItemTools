@@ -19,7 +19,7 @@ import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
  */
 @CommandHeader(
     name = "nbtedit",
-    aliases = ["nbt"],
+    aliases = ["itsnbtedit", "nbt"],
     permission = "ItemTools.command.nbtedit.use",
     permissionDefault = PermissionDefault.OP
 )

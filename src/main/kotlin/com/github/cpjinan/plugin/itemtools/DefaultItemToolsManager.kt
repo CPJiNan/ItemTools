@@ -1,5 +1,7 @@
 package com.github.cpjinan.plugin.itemtools
 
+import com.github.cpjinan.plugin.itemtools.ItemTools.plugin
+import com.github.cpjinan.plugin.itemtools.utils.FileUtils.releaseResource
 import org.bukkit.Color.fromRGB
 import org.bukkit.DyeColor
 import org.bukkit.block.banner.Pattern
@@ -15,10 +17,16 @@ import org.bukkit.potion.PotionData
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.potion.PotionType
+import taboolib.common.LifeCycle
+import taboolib.common.platform.Awake
+import taboolib.common.platform.PlatformFactory
 import taboolib.library.configuration.ConfigurationSection
 import taboolib.library.xseries.XMaterial
+import taboolib.module.configuration.Type
 import taboolib.module.nms.itemTagReader
 import taboolib.platform.util.buildItem
+import top.maplex.arim.tools.folderreader.readFolderWalkConfig
+import java.io.File
 
 /**
  * ItemTools
@@ -28,8 +36,22 @@ import taboolib.platform.util.buildItem
  * @since 2025/5/4 15:08
  */
 object DefaultItemToolsManager : ItemToolsManager {
-    /** 从配置构建物品 **/
-    override fun getItemFromConfig(config: ConfigurationSection): ItemStack {
+    override val item: HashMap<String, ItemStack> = hashMapOf()
+
+    /** 重载物品配置 **/
+    override fun reload() {
+        readFolderWalkConfig(File("./plugins/ItemTools/item")) {
+            setReadType(Type.YAML)
+            walk {
+                getKeys(false).forEach {
+                    item[it] = buildItem(getConfigurationSection(it)!!)
+                }
+            }
+        }
+    }
+
+    /** 从配置文件构建物品 **/
+    override fun buildItem(config: ConfigurationSection): ItemStack {
         val material = config.getString("Type", "AIR")!!
         val damage = config.getInt("Data", 0)
         val name = config.getString("Display", "")!!
@@ -44,29 +66,29 @@ object DefaultItemToolsManager : ItemToolsManager {
             .flags(flags).shiny(shiny).unbreakable(unbreakable).originMeta(originMeta).colored().nbt(nbt)
     }
 
-    fun material(material: String): ItemStack {
+    private fun material(material: String): ItemStack {
         return buildItem(XMaterial.valueOf(material))
     }
 
-    fun ItemStack.damage(damage: Int): ItemStack {
+    private fun ItemStack.damage(damage: Int): ItemStack {
         return buildItem(this) {
             this.damage = damage
         }
     }
 
-    fun ItemStack.name(name: String): ItemStack {
+    private fun ItemStack.name(name: String): ItemStack {
         return buildItem(this) {
             this.name = name
         }
     }
 
-    fun ItemStack.lore(lore: List<String>): ItemStack {
+    private fun ItemStack.lore(lore: List<String>): ItemStack {
         return buildItem(this) {
             this.lore.addAll(lore)
         }
     }
 
-    fun ItemStack.enchants(enchant: ConfigurationSection): ItemStack {
+    private fun ItemStack.enchants(enchant: ConfigurationSection): ItemStack {
         return buildItem(this) {
             enchant.getKeys(false).forEach {
                 val ench = Enchantment.getByName(it) ?: return@forEach
@@ -75,25 +97,25 @@ object DefaultItemToolsManager : ItemToolsManager {
         }
     }
 
-    fun ItemStack.flags(flags: List<String>): ItemStack {
+    private fun ItemStack.flags(flags: List<String>): ItemStack {
         return buildItem(this) {
             this.flags.addAll(flags.map { ItemFlag.valueOf(it) })
         }
     }
 
-    fun ItemStack.shiny(shiny: Boolean): ItemStack {
+    private fun ItemStack.shiny(shiny: Boolean): ItemStack {
         return buildItem(this) {
             if (shiny) this.shiny()
         }
     }
 
-    fun ItemStack.unbreakable(unbreakable: Boolean): ItemStack {
+    private fun ItemStack.unbreakable(unbreakable: Boolean): ItemStack {
         return buildItem(this) {
             this.isUnbreakable = unbreakable
         }
     }
 
-    fun ItemStack.originMeta(originMeta: ConfigurationSection): ItemStack {
+    private fun ItemStack.originMeta(originMeta: ConfigurationSection): ItemStack {
         return buildItem(this) {
             when (this.originMeta) {
                 is BannerMeta -> {
@@ -132,18 +154,29 @@ object DefaultItemToolsManager : ItemToolsManager {
         }
     }
 
-    fun ItemStack.colored(): ItemStack {
+    private fun ItemStack.colored(): ItemStack {
         return buildItem(this) {
             this.colored()
         }
     }
 
-    fun ItemStack.nbt(nbt: ConfigurationSection): ItemStack {
+    private fun ItemStack.nbt(nbt: ConfigurationSection): ItemStack {
         val clone = buildItem(this)
         clone.itemTagReader {
             nbt.getKeys(true).forEach { set(it, nbt[it]) }
             write(clone)
         }
         return clone
+    }
+
+    @Awake(LifeCycle.CONST)
+    fun onConst() {
+        PlatformFactory.registerAPI<ItemToolsManager>(DefaultItemToolsManager)
+    }
+
+    @Awake(LifeCycle.ENABLE)
+    fun onEnable() {
+        plugin.releaseResource("item/Example.yml")
+        reload()
     }
 }

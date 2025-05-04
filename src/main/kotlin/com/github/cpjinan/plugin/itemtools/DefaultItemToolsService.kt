@@ -108,7 +108,6 @@ object DefaultItemToolsService : ItemToolsService {
 
     @Awake(LifeCycle.CONST)
     fun onConst() {
-        // 注册服务
         PlatformFactory.registerAPI<ItemToolsService>(DefaultItemToolsService)
     }
 }

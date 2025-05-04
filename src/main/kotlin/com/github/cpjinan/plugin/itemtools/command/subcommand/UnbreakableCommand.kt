@@ -18,6 +18,7 @@ import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
  */
 @CommandHeader(
     name = "unbreakable",
+    aliases = ["itsunbreakable"],
     permission = "ItemTools.command.unbreakable.use",
     permissionDefault = PermissionDefault.OP
 )

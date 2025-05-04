@@ -14,7 +14,6 @@ import taboolib.common.platform.PlatformFactory
 object DefaultItemToolsHook : ItemToolsHook {
     @Awake(LifeCycle.CONST)
     fun onConst() {
-        // 注册服务
         PlatformFactory.registerAPI<ItemToolsHook>(DefaultItemToolsHook)
     }
 }

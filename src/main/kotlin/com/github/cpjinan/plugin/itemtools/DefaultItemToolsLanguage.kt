@@ -87,7 +87,6 @@ object DefaultItemToolsLanguage : ItemToolsLanguage {
 
     @Awake(LifeCycle.CONST)
     fun onConst() {
-        // 注册服务
         PlatformFactory.registerAPI<ItemToolsLanguage>(DefaultItemToolsLanguage)
     }
 }
