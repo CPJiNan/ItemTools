@@ -108,7 +108,7 @@ command-item-subCommands-get-usage: '&8<&7物品 ID&8> &8[&7数量&8]'
 command-item-subCommands-give-description: '给予玩家物品'
 command-item-subCommands-give-usage: '&8<&7玩家名称&8> &8<&7物品 ID&8> &8[&7数量&8]'
 command-item-subCommands-save-description: '保存物品到配置'
-command-item-subCommands-save-usage: '&8<&7物品 ID&8> &8[&7保存路径&8]'
+command-item-subCommands-save-usage: '&8[&7物品 ID&8] &8[&7保存路径&8]'
 command-loreedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'
