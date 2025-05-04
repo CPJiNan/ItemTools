@@ -8,6 +8,13 @@ Plugin-Reloaded: '&8[&3Item&bTools&8] &b信息 &8| &6插件重载完毕.'
 Error-Not-Player: "&c控制台不能执行此操作."
 Error-Air-In-Hand: "&c手中物品为空气."
 
+# 物品相关
+Item-List: "&7正在查看物品列表&8:"
+Item-Get: "&7已获取 &f{1} &7个 物品 &f{0} &7至手中."
+Item-Give: "&7已给予 &f{2} 玩家 &f{1} &7个 物品 &f{0} &7."
+Item-Save: "&7已将手中物品保存至 &f{0} &7中的 &f{1} &7."
+Item-Not-Found: "&c未找到指定物品."
+
 # Lore 相关
 Lore-Check: "&7正在查看物品 &f{0} &7的 Lore&8:"
 Lore-Add: "&7已新增 Lore &f{0} &7至手中物品！"

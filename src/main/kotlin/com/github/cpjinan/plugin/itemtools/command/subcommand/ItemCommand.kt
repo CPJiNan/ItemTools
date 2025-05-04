@@ -3,7 +3,6 @@ package com.github.cpjinan.plugin.itemtools.command.subcommand
 import com.github.cpjinan.plugin.itemtools.ItemTools
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.*
-import taboolib.common.util.isConsole
 import taboolib.module.lang.sendLang
 import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
@@ -20,7 +19,7 @@ import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
     permissionDefault = PermissionDefault.OP
 )
 object ItemCommand {
-    val serviceAPI = ItemTools.api().getService()
+    val managerAPI = ItemTools.api().getManager()
 
     @CommandBody
     val main = mainCommand {
@@ -30,10 +29,16 @@ object ItemCommand {
     @CommandBody(permission = "ItemTools.command.item.list", permissionDefault = PermissionDefault.OP)
     val list = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
-            if (sender.isConsole()) {
-                sender.sendLang("Error-Not-Player")
-                return@execute
-            }
+            listItem(sender)
         }
+    }
+
+    /** 查看物品列表 **/
+    fun listItem(sender: ProxyCommandSender) {
+        sender.sendMessage("")
+        sender.sendLang("Item-List")
+        sender.sendMessage("")
+        sender.sendMessage(managerAPI.item.keys.joinToString("§7, ") { "§f$it" })
+        sender.sendMessage("")
     }
 }
