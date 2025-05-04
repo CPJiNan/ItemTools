@@ -24,9 +24,13 @@ taboolib {
     }
     description {
         contributors { name("CPJiNan") }
+        dependencies {
+            name("MythicMobs").optional(true)
+        }
     }
     version { taboolib = "6.2.3-8cc2f66" }
     relocate("top.maplex.arim", "com.github.cpjinan.plugin.itemtools.arim")
+    relocate("ink.ptms.um", "com.github.cpjinan.plugin.itemtools.um")
 
 }
 
@@ -40,6 +44,7 @@ dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
     taboo("top.maplex.arim:Arim:1.2.14")
+    taboo("ink.ptms:um:1.1.5")
 }
 
 java {

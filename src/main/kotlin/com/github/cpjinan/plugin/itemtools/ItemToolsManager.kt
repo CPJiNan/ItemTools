@@ -25,10 +25,10 @@ interface ItemToolsManager {
     fun getItem(id: String): ItemStack?
 
     /** 获取物品列表 **/
-    fun getItems(): HashMap<String, ItemStack>
+    fun getItemList(): Map<String, ItemStack>
 
     /** 获取物品名称列表 **/
-    fun getItemNames(): List<String>
+    fun getItemNameList(): List<String>
 
     /** 从配置文件构建物品 **/
     fun getItemFromConfig(config: ConfigurationSection): ItemStack

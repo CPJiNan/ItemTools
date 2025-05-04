@@ -44,6 +44,7 @@ object DefaultItemToolsManager : ItemToolsManager {
     /** 重载物品配置 **/
     override fun reload() {
         item = hashMapOf()
+        // 加载 ItemTools 物品
         readFolderWalkConfig(File("./plugins/ItemTools/item")) {
             setReadType(Type.YAML)
             walk {
@@ -52,21 +53,24 @@ object DefaultItemToolsManager : ItemToolsManager {
                 }
             }
         }
+        // 导入 MythicMobs 物品
+        val mythicAPI = ItemTools.api().getHook().getMythicMobs()
+        if (mythicAPI.isPluginEnabled()) item.putAll(mythicAPI.getItemList().mapKeys { "MythicMobs:${it.key}" })
     }
 
     /** 给予玩家物品 **/
     override fun giveItem(player: Player, id: String, amount: Int) {
-        player.giveItem(getItems()[id], amount)
+        player.giveItem(getItemList()[id], amount)
     }
 
     /** 获取指定物品 **/
-    override fun getItem(id: String): ItemStack? = getItems()[id]
+    override fun getItem(id: String): ItemStack? = getItemList()[id]
 
     /** 获取物品列表 **/
-    override fun getItems(): HashMap<String, ItemStack> = item
+    override fun getItemList(): Map<String, ItemStack> = item
 
     /** 获取物品名称列表 **/
-    override fun getItemNames(): List<String> = getItems().keys.toList()
+    override fun getItemNameList(): List<String> = getItemList().keys.toList()
 
     /** 从配置文件构建物品 **/
     override fun getItemFromConfig(config: ConfigurationSection): ItemStack {
