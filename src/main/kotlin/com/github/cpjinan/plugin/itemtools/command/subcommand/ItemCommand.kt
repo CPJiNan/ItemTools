@@ -38,7 +38,7 @@ object ItemCommand {
     @CommandBody(permission = "ItemTools.command.item.get", permissionDefault = PermissionDefault.OP)
     val get = subCommand {
         dynamic("id") {
-            suggest { managerAPI.getItemNames() }
+            suggestUncheck { managerAPI.getItemNames() }
             execute<ProxyCommandSender> { sender, context, _ ->
                 getItem(sender, context["id"])
             }
@@ -52,7 +52,7 @@ object ItemCommand {
     @CommandBody(permission = "ItemTools.command.item.give", permissionDefault = PermissionDefault.OP)
     val give = subCommand {
         player("player") { suggestPlayers() }.dynamic("id") {
-            suggest { managerAPI.getItemNames() }
+            suggestUncheck { managerAPI.getItemNames() }
             execute<ProxyCommandSender> { sender, context, _ ->
                 giveItem(sender, context.player("player").cast(), context["id"])
             }
