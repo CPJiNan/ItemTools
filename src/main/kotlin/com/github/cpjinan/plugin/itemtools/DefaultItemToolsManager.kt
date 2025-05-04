@@ -39,10 +39,11 @@ import java.io.File
  * @since 2025/5/4 15:08
  */
 object DefaultItemToolsManager : ItemToolsManager {
-    override val item: HashMap<String, ItemStack> = hashMapOf()
+    override var item: HashMap<String, ItemStack> = hashMapOf()
 
     /** 重载物品配置 **/
     override fun reload() {
+        item = hashMapOf()
         readFolderWalkConfig(File("./plugins/ItemTools/item")) {
             setReadType(Type.YAML)
             walk {
