@@ -77,7 +77,7 @@ object ItemCommand {
                 return@execute
             }
             val item = sender.cast<Player>().itemInHand
-            saveItem(sender, item, item.getName().uncolored())
+            saveItem(sender, item, item.getName().uncolored().replace(" ", ""))
         }
         dynamic("id") {
             execute<ProxyCommandSender> { sender, context, _ ->
