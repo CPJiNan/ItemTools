@@ -8,6 +8,14 @@ Plugin-Reloaded: '&8[&3Item&bTools&8] &b信息 &8| &6插件重载完毕.'
 Error-Not-Player: "&c控制台不能执行此操作."
 Error-Air-In-Hand: "&c手中物品为空气."
 
+# Lore 相关
+Lore-Check: "&7正在查看物品 &f{0} &7的 Lore"
+Lore-Add: "&7已新增 Lore &f{0} &7至手中物品！"
+Lore-Remove: "&7已移除手中物品的第 &f{0} &7行 Lore！"
+Lore-Set: "&7已设置手中物品的第 &f{0} &7行 Lore 为 &f{1} &7！"
+Lore-Insert: "&7已在手中物品第 &f{0} &7行与第 &f{1} &7行 Lore 之间插入内容 &f{2} &7!"
+Lore-Clear: "&7已清除手中物品的全部 Lore!"
+
 # NBT 相关
 NBT-Check: "&7正在查看物品 &f{0} &7的 NBT"
 NBT-Set: "&7已设置手中物品的 NBT 节点 &f{0} &7的值为 &f{1} &7."
@@ -58,6 +66,33 @@ command-subCommands-enchant-description: '查看附魔命令帮助'
 command-subCommands-enchant-usage: ''
 command-subCommands-reload-description: '重载插件'
 command-subCommands-reload-usage: ''
+command-loreedit-helper:
+  - '&7'
+  - '  &f&l{pluginId} &7v{pluginVersion}'
+  - '&7'
+  - '  &7命令: &f/{command} &8\[...\]'
+  - '  &7参数:'
+  - '{subCommands}'
+  - '&7'
+command-loreedit-sub:
+  - '    &8- [&f{name}](h=/{command} {name} {usage}&8- &7{description};suggest=/{command} {name})'
+  - '      &7{description}'
+command-loreedit-argument-missing:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7参数不足'
+  - '&8[&3&lItem&b&lTools&8] &7正确用法:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {name} {usage}&8- &7{description}'
+command-loreedit-argument-wrong:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7参数有误'
+  - '&8[&3&lItem&b&lTools&8] &7正确用法:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {name} {usage}&8- &7{description}'
+command-loreedit-argument-unknown:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7不存在'
+  - '&8[&3&lItem&b&lTools&8] &7你可能想要:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {similar} {usage}&8- &7{description}'
+command-loreedit-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7只能由 &f玩家 &7执行'
+command-loreedit-no-desc: '暂无描述'
+command-loreedit-subCommands-check-description: '查看手中物品 Lore'
+command-loreedit-subCommands-check-usage: ''
 command-nbtedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'

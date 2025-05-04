@@ -11,7 +11,10 @@ import org.bukkit.inventory.ItemStack
  */
 interface ItemToolsService {
     /** 获取物品 Lore **/
-    fun getLore(item: ItemStack, index: Int): List<String>
+    fun getLore(item: ItemStack): List<String>
+
+    /** 获取物品 Lore **/
+    fun getLore(item: ItemStack, index: Int): String
 
     /** 新增物品 Lore **/
     fun addLore(item: ItemStack, element: String): ItemStack

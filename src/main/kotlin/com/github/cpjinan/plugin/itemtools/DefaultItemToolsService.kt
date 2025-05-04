@@ -22,8 +22,13 @@ import taboolib.platform.util.modifyMeta
  */
 object DefaultItemToolsService : ItemToolsService {
     /** 获取物品 Lore **/
-    override fun getLore(item: ItemStack, index: Int): List<String> {
+    override fun getLore(item: ItemStack): List<String> {
         return item.itemMeta.lore
+    }
+
+    /** 获取物品 Lore **/
+    override fun getLore(item: ItemStack, index: Int): String {
+        return getLore(item)[index]
     }
 
     /** 新增物品 Lore **/
