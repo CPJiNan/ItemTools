@@ -90,6 +90,21 @@ object LoreCommand {
         }
     }
 
+    @Suppress("DEPRECATION")
+    @CommandBody(permission = "ItemTools.command.loreedit.insert", permissionDefault = PermissionDefault.OP)
+    val insert = subCommand {
+        int("index").dynamic("element") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+
+                insertLore(sender, sender.cast<Player>().itemInHand, context.int("index"), context["element"])
+            }
+        }
+    }
+
     /** 查看物品 Lore **/
     fun checkLore(sender: ProxyCommandSender, item: ItemStack) {
         if (NBTCommand.serviceAPI.isAir(item)) {
@@ -147,5 +162,32 @@ object LoreCommand {
 
         serviceAPI.setLore(item, index - 1, element)
         sender.sendLang("Lore-Set", index, element)
+    }
+
+    /** 插入物品 Lore **/
+    fun insertLore(sender: ProxyCommandSender, item: ItemStack, index: Int, element: String) {
+        if (NBTCommand.serviceAPI.isAir(item)) {
+            sender.sendLang("Error-Air-In-Hand")
+            return
+        }
+
+        if (index !in 1..serviceAPI.getLore(item).size) {
+            sender.sendLang("Lore-Index-Not-Found", index, serviceAPI.getLore(item).size)
+            return
+        }
+
+        serviceAPI.addLore(item, index, element)
+        sender.sendLang("Lore-Insert", index, index + 1, element)
+    }
+
+    /** 清空物品 Lore **/
+    fun clearLore(sender: ProxyCommandSender, item: ItemStack) {
+        if (NBTCommand.serviceAPI.isAir(item)) {
+            sender.sendLang("Error-Air-In-Hand")
+            return
+        }
+
+        serviceAPI.removeLore(item)
+        sender.sendLang("Lore-Clear")
     }
 }

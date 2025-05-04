@@ -45,7 +45,14 @@ object DefaultItemToolsService : ItemToolsService {
         }
     }
 
-    /** 删除物品 Lore **/
+    /** 移除物品 Lore **/
+    override fun removeLore(item: ItemStack): ItemStack {
+        return item.modifyLore {
+            clear()
+        }
+    }
+
+    /** 移除物品 Lore **/
     override fun removeLore(item: ItemStack, index: Int): ItemStack {
         return item.modifyLore {
             removeAt(index)

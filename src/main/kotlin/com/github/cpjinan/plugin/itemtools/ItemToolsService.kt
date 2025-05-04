@@ -22,7 +22,10 @@ interface ItemToolsService {
     /** 新增物品 Lore **/
     fun addLore(item: ItemStack, index: Int, element: String): ItemStack
 
-    /** 删除物品 Lore **/
+    /** 移除物品 Lore **/
+    fun removeLore(item: ItemStack): ItemStack
+
+    /** 移除物品 Lore **/
     fun removeLore(item: ItemStack, index: Int): ItemStack
 
     /** 设置物品 Lore **/
