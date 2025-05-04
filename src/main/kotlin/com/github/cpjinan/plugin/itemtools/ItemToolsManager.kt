@@ -3,6 +3,7 @@ package com.github.cpjinan.plugin.itemtools
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import taboolib.library.configuration.ConfigurationSection
+import taboolib.module.configuration.Configuration
 
 /**
  * ItemTools
@@ -30,5 +31,8 @@ interface ItemToolsManager {
     fun getItemNames(): List<String>
 
     /** 从配置文件构建物品 **/
-    fun buildItem(config: ConfigurationSection): ItemStack
+    fun getItemFromConfig(config: ConfigurationSection): ItemStack
+
+    /** 保存物品到配置文件 **/
+    fun saveItemToConfig(item: ItemStack, config: Configuration, id: String)
 }

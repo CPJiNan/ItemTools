@@ -23,7 +23,10 @@ import taboolib.common.platform.Awake
 import taboolib.common.platform.PlatformFactory
 import taboolib.library.configuration.ConfigurationSection
 import taboolib.library.xseries.XMaterial
+import taboolib.module.configuration.Configuration
 import taboolib.module.configuration.Type
+import taboolib.module.nms.getItemTag
+import taboolib.module.nms.getName
 import taboolib.module.nms.itemTagReader
 import taboolib.platform.util.buildItem
 import taboolib.platform.util.giveItem
@@ -46,7 +49,7 @@ object DefaultItemToolsManager : ItemToolsManager {
             setReadType(Type.YAML)
             walk {
                 getKeys(false).forEach {
-                    item[it] = buildItem(getConfigurationSection(it)!!)
+                    item[it] = getItemFromConfig(getConfigurationSection(it)!!)
                 }
             }
         }
@@ -67,7 +70,7 @@ object DefaultItemToolsManager : ItemToolsManager {
     override fun getItemNames(): List<String> = getItems().keys.toList()
 
     /** 从配置文件构建物品 **/
-    override fun buildItem(config: ConfigurationSection): ItemStack {
+    override fun getItemFromConfig(config: ConfigurationSection): ItemStack {
         val material = config.getString("Type", "AIR")!!
         val damage = config.getInt("Data", 0)
         val name = config.getString("Display", "")!!
@@ -81,6 +84,8 @@ object DefaultItemToolsManager : ItemToolsManager {
         return material(material).damage(damage).name(name).lore(lore).enchants(enchants)
             .flags(flags).shiny(shiny).unbreakable(unbreakable).originMeta(originMeta).colored().nbt(nbt)
     }
+
+    // region getItemFromConfig
 
     private fun material(material: String): ItemStack {
         return buildItem(XMaterial.valueOf(material))
@@ -184,6 +189,116 @@ object DefaultItemToolsManager : ItemToolsManager {
         }
         return clone
     }
+
+    // endregion
+
+    /** 保存物品到配置文件 **/
+    override fun saveItemToConfig(item: ItemStack, config: Configuration, id: String) {
+        material(item, config, id)
+        damage(item, config, id)
+        name(item, config, id)
+        lore(item, config, id)
+        enchants(item, config, id)
+        flags(item, config, id)
+        unbreakable(item, config, id)
+        originMeta(item, config, id)
+        nbt(item, config, id)
+    }
+
+    // region saveItemToConfig
+
+    private fun material(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            config["$path.Type"] = XMaterial.matchXMaterial(this.material).name
+        }
+    }
+
+    private fun damage(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            if (this.damage == 0) return@buildItem
+            config["$path.Data"] = this.damage
+        }
+    }
+
+    private fun name(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            config["$path.Display"] = item.getName()
+        }
+    }
+
+    private fun lore(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            if (this.lore.isEmpty()) return@buildItem
+            config["$path.Lore"] = this.lore
+        }
+    }
+
+    private fun enchants(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            if (this.enchants.isEmpty()) return@buildItem
+            this.enchants.forEach { (ench, level) ->
+                config["$path.Enchantments.${ench.name}"] = level
+            }
+            config["$path.Options.Glow"] = true
+        }
+    }
+
+    private fun flags(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            if (this.flags.isEmpty()) return@buildItem
+            config["$path.Options.HideFlags"] = this.flags.map { it.name }
+        }
+    }
+
+    private fun unbreakable(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            if (this.isUnbreakable) config["$path.Options.Unbreakable"] = true
+        }
+    }
+
+    private fun originMeta(item: ItemStack, config: Configuration, path: String) {
+        buildItem(item) {
+            when (this.originMeta) {
+                is BannerMeta -> {
+                    config["$path.Options.BannerPatterns"] =
+                        this.patterns.map { "${it.color.name}-${it.pattern.identifier}" }
+                }
+
+                is LeatherArmorMeta -> {
+                    if (this.color == null) return@buildItem
+                    config["$path.Options.Color"] = this.color!!.asRGB()
+                }
+
+                is PotionMeta -> {
+                    if (this.potionData == null) return@buildItem
+                    config["$path.Options.BasePotionData.Type"] = this.potionData!!.type.name
+                    config["$path.Options.BasePotionData.Extended"] = this.potionData!!.isExtended
+                    config["$path.Options.BasePotionData.Upgraded"] = this.potionData!!.isUpgraded
+                    config["$path.Options.PotionEffects"] =
+                        this.potions.map { "${it.type.name}-${it.amplifier}-${it.duration}" }
+                }
+
+                is SkullMeta -> {
+                    if (skullOwner == null) return@buildItem
+                    config["$path.Options.SkullOwner"] = skullOwner
+                }
+            }
+        }
+    }
+
+    private fun nbt(item: ItemStack, config: Configuration, path: String) {
+        item.getItemTag().entries.filter {
+            it.key !in listOf(
+                "display", "Damage", "ench", "Enchantments",
+                "Unbreakable", "HideFlags",
+                "BlockEntityTag", "Potion", "SkullOwner"
+            )
+        }.forEach {
+            config["$path.NBT.${it.key}"] = it.value.unsafeData()
+        }
+    }
+
+    // endregion
 
     @Awake(LifeCycle.CONST)
     fun onConst() {

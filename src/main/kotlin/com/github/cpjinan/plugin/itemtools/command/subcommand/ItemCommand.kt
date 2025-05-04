@@ -1,11 +1,16 @@
 package com.github.cpjinan.plugin.itemtools.command.subcommand
 
 import com.github.cpjinan.plugin.itemtools.ItemTools
+import com.github.cpjinan.plugin.itemtools.utils.FileUtils
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.*
 import taboolib.common.util.isConsole
+import taboolib.module.chat.uncolored
+import taboolib.module.configuration.Configuration
 import taboolib.module.lang.sendLang
+import taboolib.module.nms.getName
 import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
 /**
@@ -63,6 +68,36 @@ object ItemCommand {
         }
     }
 
+    @Suppress("DEPRECATION")
+    @CommandBody(permission = "ItemTools.command.item.save", permissionDefault = PermissionDefault.OP)
+    val save = subCommand {
+        execute<ProxyCommandSender> { sender, context, _ ->
+            if (sender.isConsole()) {
+                sender.sendLang("Error-Not-Player")
+                return@execute
+            }
+            val item = sender.cast<Player>().itemInHand
+            saveItem(sender, item, item.getName().uncolored())
+        }
+        dynamic("id") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+                saveItem(sender, sender.cast<Player>().itemInHand, context["id"])
+            }
+        }.dynamic("path") {
+            execute<ProxyCommandSender> { sender, context, _ ->
+                if (sender.isConsole()) {
+                    sender.sendLang("Error-Not-Player")
+                    return@execute
+                }
+                saveItem(sender, sender.cast<Player>().itemInHand, context["id"], context["path"])
+            }
+        }
+    }
+
     /** 查看物品列表 **/
     fun listItem(sender: ProxyCommandSender) {
         sender.sendMessage("")
@@ -99,5 +134,16 @@ object ItemCommand {
         managerAPI.giveItem(player, id, amount)
 
         sender.sendLang("Item-Give", id, amount, player.name)
+    }
+
+    /** 保存物品 **/
+    fun saveItem(sender: ProxyCommandSender, item: ItemStack, id: String, path: String = "SaveItem.yml") {
+        val savePath = "item/${path.takeIf { it.endsWith(".yml") } ?: "$path.yml"}"
+        val file = FileUtils.getFileOrCreate(savePath)
+        val config = Configuration.loadFromFile(file)
+        config[id] = null
+        managerAPI.saveItemToConfig(item, config, id)
+        config.saveToFile(file)
+        sender.sendLang("Item-Save", path, id)
     }
 }
