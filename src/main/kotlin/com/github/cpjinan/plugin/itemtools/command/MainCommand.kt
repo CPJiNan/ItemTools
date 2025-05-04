@@ -26,6 +26,13 @@ object MainCommand {
         createTabooLegacyStyleCommandHelper()
     }
 
+    @CommandBody(permission = "ItemTools.command.loreedit.use", permissionDefault = PermissionDefault.OP)
+    val loreedit = subCommand {
+        execute<ProxyCommandSender> { sender, _, _ ->
+            sender.performCommand("itemtools:loreedit")
+        }
+    }
+
     @CommandBody(permission = "ItemTools.command.nbtedit.use", permissionDefault = PermissionDefault.OP)
     val nbtedit = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->

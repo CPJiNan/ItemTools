@@ -48,6 +48,8 @@ command-argument-unknown:
   - '&8[&3&lItem&b&lTools&8] &7/{command} {similar} {usage}&8- &7{description}'
 command-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7只能由 &f玩家 &7执行'
 command-no-desc: '暂无描述'
+command-subCommands-loreedit-description: '查看 Lore 编辑器命令帮助'
+command-subCommands-loreedit-usage: ''
 command-subCommands-nbtedit-description: '查看 NBT 编辑器命令帮助'
 command-subCommands-nbtedit-usage: ''
 command-subCommands-unbreakable-description: '查看无法破坏命令帮助'
