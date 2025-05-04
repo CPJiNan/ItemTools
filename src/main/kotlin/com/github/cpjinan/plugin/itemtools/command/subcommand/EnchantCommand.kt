@@ -67,10 +67,13 @@ object EnchantCommand {
             return
         }
 
+        sender.sendMessage("")
         sender.sendLang("Enchant-Check", item.getName())
+        sender.sendMessage("")
         serviceAPI.getEnchant(item).forEach { (ench, level) ->
             sender.sendMessage("  §7${ench}§8: §f$level")
         }
+        sender.sendMessage("")
     }
 
     /** 设置物品附魔 **/

@@ -52,9 +52,12 @@ object LoreCommand {
             return
         }
 
+        sender.sendMessage("")
         sender.sendLang("Lore-Check", item.getName())
+        sender.sendMessage("")
         serviceAPI.getLore(item).forEachIndexed { index, element ->
             sender.sendMessage("&7${index + 1} &8| &r$element".colored())
         }
+        sender.sendMessage("")
     }
 }

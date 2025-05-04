@@ -66,8 +66,6 @@ object NBTCommand {
             return
         }
 
-        sender.sendLang("NBT-Check", item.getName())
-
         fun getItemTag(tag: ItemTag, indent: String): List<String> {
             val itemTag = mutableListOf<String>()
             tag.forEach { (key, value) ->
@@ -82,20 +80,24 @@ object NBTCommand {
                         value.forEach {
                             when (it.type) {
                                 ItemTagType.COMPOUND -> itemTag.addAll(getItemTag(it.asCompound(), "$indent  "))
-                                else -> itemTag.add("$indent  §f- §f$it")
+                                else -> itemTag.add("$indent  §f- §f$it§f")
                             }
                         }
                     }
 
-                    else -> itemTag.add("$indent§7$key§8: §f$value")
+                    else -> itemTag.add("$indent§7$key§8: §f$value§f")
                 }
             }
             return itemTag
         }
 
+        sender.sendMessage("")
+        sender.sendLang("NBT-Check", item.getName())
+        sender.sendMessage("")
         getItemTag(item.getItemTag(), "  ").forEach {
             sender.sendMessage(it)
         }
+        sender.sendMessage("")
     }
 
     /** 设置物品 NBT **/
