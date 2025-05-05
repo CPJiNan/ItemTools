@@ -105,6 +105,19 @@ object LoreCommand {
         }
     }
 
+    @Suppress("DEPRECATION")
+    @CommandBody(permission = "ItemTools.command.loreedit.clear", permissionDefault = PermissionDefault.OP)
+    val clear = subCommand {
+        execute<ProxyCommandSender> { sender, context, _ ->
+            if (sender.isConsole()) {
+                sender.sendLang("Error-Not-Player")
+                return@execute
+            }
+
+            clearLore(sender, sender.cast<Player>().itemInHand)
+        }
+    }
+
     /** 查看物品 Lore **/
     fun checkLore(sender: ProxyCommandSender, item: ItemStack) {
         if (NBTCommand.serviceAPI.isAir(item)) {
