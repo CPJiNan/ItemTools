@@ -17,9 +17,12 @@ Options:
 Item:
   # 物品库插件
   Plugin:
-    - MythicMobs
+    - "MythicMobs"
+
+# NBT 设置
+NBT:
   # NBT 过滤器
-  NBT-Filter:
+  Filter:
     - "display"
     - "Damage"
     - "ench"

@@ -41,11 +41,11 @@ object ItemToolsSettings {
     @ConfigNode("Options.Debug")
     var debug = false
 
-    /** NBT 过滤器 **/
-    @ConfigNode("Item.NBT-Filter")
-    var nbtFilter = listOf<String>()
-
     /** 物品库插件 **/
     @ConfigNode("Item.Plugin")
     var plugin = listOf<String>()
+
+    /** NBT 过滤器 **/
+    @ConfigNode("NBT.Filter")
+    var nbtFilter = listOf<String>()
 }
