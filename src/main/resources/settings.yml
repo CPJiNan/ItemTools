@@ -18,3 +18,14 @@ Item:
   # 物品库插件
   Plugin:
     - MythicMobs
+  # NBT 过滤器
+  NBT-Filter:
+    - "display"
+    - "Damage"
+    - "ench"
+    - "Enchantments"
+    - "Unbreakable"
+    - "HideFlags"
+    - "BlockEntityTag"
+    - "Potion"
+    - "SkullOwner"

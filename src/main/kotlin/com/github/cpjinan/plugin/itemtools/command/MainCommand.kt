@@ -31,8 +31,10 @@ object MainCommand {
         permissionDefault = PermissionDefault.OP
     )
     val item = subCommand {
-        execute<ProxyCommandSender> { sender, _, _ ->
-            sender.performCommand("itemtools:item")
+        execute<ProxyCommandSender> { sender, _, content ->
+            dynamic {
+                sender.performCommand("itemtools:$content")
+            }
         }
     }
 
@@ -42,8 +44,10 @@ object MainCommand {
         permissionDefault = PermissionDefault.OP
     )
     val loreedit = subCommand {
-        execute<ProxyCommandSender> { sender, _, _ ->
-            sender.performCommand("itemtools:loreedit")
+        execute<ProxyCommandSender> { sender, _, content ->
+            dynamic {
+                sender.performCommand("itemtools:$content")
+            }
         }
     }
 
@@ -53,8 +57,10 @@ object MainCommand {
         permissionDefault = PermissionDefault.OP
     )
     val nbtedit = subCommand {
-        execute<ProxyCommandSender> { sender, _, _ ->
-            sender.performCommand("itemtools:nbtedit")
+        execute<ProxyCommandSender> { sender, _, content ->
+            dynamic {
+                sender.performCommand("itemtools:$content")
+            }
         }
     }
 
@@ -63,8 +69,10 @@ object MainCommand {
         permissionDefault = PermissionDefault.OP
     )
     val unbreakable = subCommand {
-        execute<ProxyCommandSender> { sender, _, _ ->
-            sender.performCommand("itemtools:unbreakable")
+        execute<ProxyCommandSender> { sender, _, content ->
+            dynamic {
+                sender.performCommand("itemtools:$content")
+            }
         }
     }
 
@@ -74,8 +82,10 @@ object MainCommand {
         permissionDefault = PermissionDefault.OP
     )
     val enchant = subCommand {
-        execute<ProxyCommandSender> { sender, _, _ ->
-            sender.performCommand("itemtools:enchant")
+        execute<ProxyCommandSender> { sender, _, content ->
+            dynamic {
+                sender.performCommand("itemtools:$content")
+            }
         }
     }
 

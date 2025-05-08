@@ -80,12 +80,12 @@ object DefaultItemToolsManager : ItemToolsManager {
         val damage = config.getInt("Data", 0)
         val name = config.getString("Display", "")!!
         val lore = config.getStringList("Lore")
-        val enchants = config.getConfigurationSection("Enchantments")!!
+        val enchants = config.getConfigurationSection("Enchantments") ?: Configuration.empty()
         val flags = config.getStringList("Options.HideFlags")
         val shiny = config.getBoolean("Options.Glow", false)
         val unbreakable = config.getBoolean("Options.Unbreakable", false)
-        val originMeta = config.getConfigurationSection("Options")!!
-        val nbt = config.getConfigurationSection("NBT")!!
+        val originMeta = config.getConfigurationSection("Options") ?: Configuration.empty()
+        val nbt = config.getConfigurationSection("NBT") ?: Configuration.empty()
         return material(material).damage(damage).name(name).lore(lore).enchants(enchants)
             .flags(flags).shiny(shiny).unbreakable(unbreakable).originMeta(originMeta).colored().nbt(nbt)
     }
@@ -300,15 +300,11 @@ object DefaultItemToolsManager : ItemToolsManager {
             }
         }
 
-        item.getItemTag().entries.filter {
-            it.key !in listOf(
-                "display", "Damage", "ench", "Enchantments",
-                "Unbreakable", "HideFlags",
-                "BlockEntityTag", "Potion", "SkullOwner"
-            )
-        }.forEach {
-            config["$path.NBT.${it.key}"] = it.value.getValue()
-        }
+        item.getItemTag().entries
+            .filter { it.key !in ItemToolsSettings.nbtFilter }
+            .forEach {
+                config["$path.NBT.${it.key}"] = it.value.getValue()
+            }
     }
 
     // endregion

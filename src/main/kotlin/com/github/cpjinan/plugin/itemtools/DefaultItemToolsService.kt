@@ -8,6 +8,7 @@ import taboolib.common.LifeCycle
 import taboolib.common.platform.Awake
 import taboolib.common.platform.PlatformFactory
 import taboolib.module.nms.getItemTag
+import taboolib.module.nms.getName
 import taboolib.module.nms.itemTagReader
 import taboolib.platform.util.isAir
 import taboolib.platform.util.modifyLore
@@ -21,6 +22,18 @@ import taboolib.platform.util.modifyMeta
  * @since 2025/5/1 17:54
  */
 object DefaultItemToolsService : ItemToolsService {
+    /** 获取物品名称 **/
+    override fun getName(item: ItemStack): String {
+        return item.getName()
+    }
+
+    /** 设置物品名称 **/
+    override fun setName(item: ItemStack, name: String) {
+        item.modifyMeta<ItemMeta> {
+            this.displayName = name
+        }
+    }
+
     /** 获取物品 Lore **/
     override fun getLore(item: ItemStack): List<String> {
         return item.itemMeta.lore

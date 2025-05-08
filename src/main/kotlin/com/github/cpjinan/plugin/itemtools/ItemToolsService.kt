@@ -10,6 +10,12 @@ import org.bukkit.inventory.ItemStack
  * @since 2025/5/1 17:05
  */
 interface ItemToolsService {
+    /** 获取物品名称 **/
+    fun getName(item: ItemStack): String
+
+    /** 设置物品名称 **/
+    fun setName(item: ItemStack, name: String)
+
     /** 获取物品 Lore **/
     fun getLore(item: ItemStack): List<String>
 
