@@ -17,7 +17,6 @@ Item-Not-Found: "&c未找到指定物品 {0}."
 
 # 名称相关
 Name-Set: "&7已设置手中物品的名称为 &f{0} &7."
-Name-Colored: "&7已为手中物品 &f{0} &7的名称上色."
 
 # Lore 相关
 Lore-Check: "&7正在查看物品 &f{0} &7的 Lore&8:"
@@ -142,8 +141,6 @@ command-nameedit-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7
 command-nameedit-no-desc: '暂无描述'
 command-nameedit-subCommands-set-description: '设置手中物品名称'
 command-nameedit-subCommands-set-usage: '&8<&7内容&8>'
-command-nameedit-subCommands-colored-description: '为手中物品名称上色'
-command-nameedit-subCommands-colored-usage: ''
 command-loreedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'

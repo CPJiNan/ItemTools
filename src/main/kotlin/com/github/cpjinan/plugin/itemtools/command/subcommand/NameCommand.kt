@@ -8,7 +8,6 @@ import taboolib.common.platform.command.*
 import taboolib.common.util.isConsole
 import taboolib.module.chat.colored
 import taboolib.module.lang.sendLang
-import taboolib.module.nms.getName
 import top.maplex.arim.tools.commandhelper.createTabooLegacyStyleCommandHelper
 
 /**
@@ -46,19 +45,6 @@ object NameCommand {
         }
     }
 
-    @Suppress("DEPRECATION")
-    @CommandBody(permission = "ItemTools.command.nameedit.colored", permissionDefault = PermissionDefault.OP)
-    val colored = subCommand {
-        execute<ProxyCommandSender> { sender, context, _ ->
-            if (sender.isConsole()) {
-                sender.sendLang("Error-Not-Player")
-                return@execute
-            }
-
-            coloredName(sender, sender.cast<Player>().itemInHand)
-        }
-    }
-
     /** 设置物品名称 **/
     fun setName(sender: ProxyCommandSender, item: ItemStack, name: String) {
         if (serviceAPI.isAir(item)) {
@@ -69,17 +55,5 @@ object NameCommand {
         serviceAPI.setName(item, name)
 
         sender.sendLang("Name-Set", name)
-    }
-
-    /** 为物品名称上色 **/
-    fun coloredName(sender: ProxyCommandSender, item: ItemStack) {
-        if (serviceAPI.isAir(item)) {
-            sender.sendLang("Error-Air-In-Hand")
-            return
-        }
-
-        serviceAPI.setName(item, item.getName().colored())
-
-        sender.sendLang("Name-Colored", item.getName())
     }
 }
