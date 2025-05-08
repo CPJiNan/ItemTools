@@ -15,6 +15,10 @@ Item-Give: "&7已给予 &f{2} 玩家 &f{1} &7个 物品 &f{0} &7."
 Item-Save: "&7已将手中物品保存至 &f{0} &7中的 &f{1} &7."
 Item-Not-Found: "&c未找到指定物品 {0}."
 
+# 名称相关
+Name-Set: "&7已设置手中物品的名称为 &f{0} &7."
+Name-Colored: "&7已为手中物品 &f{0} &7的名称上色."
+
 # Lore 相关
 Lore-Check: "&7正在查看物品 &f{0} &7的 Lore&8:"
 Lore-Add: "&7已新增 Lore &f{0} &7至手中物品！"
@@ -66,6 +70,8 @@ command-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7只能由
 command-no-desc: '暂无描述'
 command-subCommands-item-description: '查看物品库命令帮助'
 command-subCommands-item-usage: ''
+command-subCommands-nameedit-description: '查看名称编辑器命令帮助'
+command-subCommands-nameedit-usage: ''
 command-subCommands-loreedit-description: '查看 Lore 编辑器命令帮助'
 command-subCommands-loreedit-usage: ''
 command-subCommands-nbtedit-description: '查看 NBT 编辑器命令帮助'
@@ -109,6 +115,35 @@ command-item-subCommands-give-description: '给予玩家物品'
 command-item-subCommands-give-usage: '&8<&7玩家名称&8> &8<&7物品 ID&8> &8[&7数量&8]'
 command-item-subCommands-save-description: '保存物品到配置'
 command-item-subCommands-save-usage: '&8[&7物品 ID&8] &8[&7保存路径&8]'
+command-nameedit-helper:
+  - '&7'
+  - '  &f&l{pluginId} &7v{pluginVersion}'
+  - '&7'
+  - '  &7命令: &f/{command} &8\[...\]'
+  - '  &7参数:'
+  - '{subCommands}'
+  - '&7'
+command-nameedit-sub:
+  - '    &8- [&f{name}](h=/{command} {name} {usage}&8- &7{description};suggest=/{command} {name})'
+  - '      &7{description}'
+command-nameedit-argument-missing:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7参数不足'
+  - '&8[&3&lItem&b&lTools&8] &7正确用法:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {name} {usage}&8- &7{description}'
+command-nameedit-argument-wrong:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7参数有误'
+  - '&8[&3&lItem&b&lTools&8] &7正确用法:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {name} {usage}&8- &7{description}'
+command-nameedit-argument-unknown:
+  - '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7不存在'
+  - '&8[&3&lItem&b&lTools&8] &7你可能想要:'
+  - '&8[&3&lItem&b&lTools&8] &7/{command} {similar} {usage}&8- &7{description}'
+command-nameedit-incorrect-sender: '&8[&3&lItem&b&lTools&8] &7指令 &f{name} &7只能由 &f玩家 &7执行'
+command-nameedit-no-desc: '暂无描述'
+command-nameedit-subCommands-set-description: '设置手中物品名称'
+command-nameedit-subCommands-set-usage: '&8<&7内容&8>'
+command-nameedit-subCommands-colored-description: '为手中物品名称上色'
+command-nameedit-subCommands-colored-usage: ''
 command-loreedit-helper:
   - '&7'
   - '  &f&l{pluginId} &7v{pluginVersion}'

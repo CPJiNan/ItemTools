@@ -39,6 +39,18 @@ object MainCommand {
     }
 
     @CommandBody(
+        permission = "ItemTools.command.nameedit.use",
+        permissionDefault = PermissionDefault.OP
+    )
+    val nameedit = subCommand {
+        execute<ProxyCommandSender> { sender, _, content ->
+            dynamic {
+                sender.performCommand("itemtools:$content")
+            }
+        }
+    }
+
+    @CommandBody(
         aliases = ["lore"],
         permission = "ItemTools.command.loreedit.use",
         permissionDefault = PermissionDefault.OP
