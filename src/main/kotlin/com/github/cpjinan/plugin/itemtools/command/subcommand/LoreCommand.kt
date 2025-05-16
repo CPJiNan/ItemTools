@@ -55,7 +55,7 @@ object LoreCommand {
                     return@execute
                 }
 
-                addLore(sender, sender.cast<Player>().itemInHand, context["element"])
+                addLore(sender, sender.cast<Player>().itemInHand, context["element"].colored())
             }
         }
     }
@@ -85,7 +85,7 @@ object LoreCommand {
                     return@execute
                 }
 
-                setLore(sender, sender.cast<Player>().itemInHand, context.int("index"), context["element"])
+                setLore(sender, sender.cast<Player>().itemInHand, context.int("index"), context["element"].colored())
             }
         }
     }
@@ -100,7 +100,7 @@ object LoreCommand {
                     return@execute
                 }
 
-                insertLore(sender, sender.cast<Player>().itemInHand, context.int("index"), context["element"])
+                insertLore(sender, sender.cast<Player>().itemInHand, context.int("index"), context["element"].colored())
             }
         }
     }
