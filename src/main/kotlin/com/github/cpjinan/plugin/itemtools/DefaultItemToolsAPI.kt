@@ -19,7 +19,7 @@ class DefaultItemToolsAPI : ItemToolsAPI {
     /** 插件挂钩接口 **/
     var localHook = PlatformFactory.getAPI<ItemToolsHook>()
 
-    /** 语言拓展接口 **/
+    /** 语言文件接口 **/
     var localLanguage = PlatformFactory.getAPI<ItemToolsLanguage>()
 
     /** 获取业务逻辑接口 **/
