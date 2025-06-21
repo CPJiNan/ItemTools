@@ -114,7 +114,7 @@ object ItemCommand {
             return
         }
 
-        if (id !in managerAPI.item) {
+        if (id !in managerAPI.getItemList()) {
             sender.sendLang("Item-Not-Found", id)
             return
         }
@@ -126,7 +126,7 @@ object ItemCommand {
 
     /** 给予物品 **/
     fun giveItem(sender: ProxyCommandSender, player: Player, id: String, amount: Int = 1) {
-        if (id !in managerAPI.item) {
+        if (id !in managerAPI.getItemList()) {
             sender.sendLang("Item-Not-Found", id)
             return
         }
