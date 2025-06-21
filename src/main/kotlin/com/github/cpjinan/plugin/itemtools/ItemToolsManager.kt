@@ -1,5 +1,6 @@
 package com.github.cpjinan.plugin.itemtools
 
+import com.github.cpjinan.plugin.itemtools.hook.item.ItemSource
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import taboolib.library.configuration.ConfigurationSection
@@ -13,8 +14,6 @@ import taboolib.module.configuration.Configuration
  * @since 2025/5/4 15:06
  */
 interface ItemToolsManager {
-    val item: HashMap<String, ItemStack>
-
     /** 重载物品配置 **/
     fun reload()
 
@@ -25,7 +24,7 @@ interface ItemToolsManager {
     fun getItem(id: String): ItemStack?
 
     /** 获取物品列表 **/
-    fun getItemList(): Map<String, ItemStack>
+    fun getItemList(): Map<String, ItemSource>
 
     /** 获取物品名称列表 **/
     fun getItemNameList(): List<String>

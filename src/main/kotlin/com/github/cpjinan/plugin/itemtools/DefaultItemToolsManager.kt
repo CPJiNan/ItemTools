@@ -1,6 +1,9 @@
 package com.github.cpjinan.plugin.itemtools
 
 import com.github.cpjinan.plugin.itemtools.ItemTools.plugin
+import com.github.cpjinan.plugin.itemtools.hook.item.ItemSource
+import com.github.cpjinan.plugin.itemtools.hook.item.ItemToolsItemSource
+import com.github.cpjinan.plugin.itemtools.hook.item.MythicMobsItemSource
 import com.github.cpjinan.plugin.itemtools.utils.FileUtils.releaseResource
 import org.bukkit.Color.fromRGB
 import org.bukkit.DyeColor
@@ -39,7 +42,7 @@ import java.io.File
  * @since 2025/5/4 15:08
  */
 object DefaultItemToolsManager : ItemToolsManager {
-    override var item: HashMap<String, ItemStack> = hashMapOf()
+    private var item: HashMap<String, ItemSource> = hashMapOf()
 
     /** 重载物品配置 **/
     override fun reload() {
@@ -49,27 +52,27 @@ object DefaultItemToolsManager : ItemToolsManager {
             setReadType(Type.YAML)
             walk {
                 getKeys(false).forEach {
-                    item[it] = getItemFromConfig(getConfigurationSection(it)!!)
+                    item[it] = ItemToolsItemSource(getConfigurationSection(it)!!)
                 }
             }
         }
         // 导入 MythicMobs 物品
         val mythicAPI = ItemTools.api().getHook().getMythicMobs()
         if (mythicAPI.isPluginEnabled() && "MythicMobs" in ItemToolsSettings.plugin) {
-            item.putAll(mythicAPI.getItemList().mapKeys { "MythicMobs:${it.key}" })
+            item.putAll(mythicAPI.getItemList().keys.map { "MythicMobs:${it}" to MythicMobsItemSource(it) })
         }
     }
 
     /** 给予玩家物品 **/
     override fun giveItem(player: Player, id: String, amount: Int) {
-        player.giveItem(getItemList()[id], amount)
+        player.giveItem(getItem(id), amount)
     }
 
     /** 获取指定物品 **/
-    override fun getItem(id: String): ItemStack? = getItemList()[id]
+    override fun getItem(id: String): ItemStack? = getItemList()[id]?.getItemStack()
 
     /** 获取物品列表 **/
-    override fun getItemList(): Map<String, ItemStack> = item
+    override fun getItemList(): Map<String, ItemSource> = item
 
     /** 获取物品名称列表 **/
     override fun getItemNameList(): List<String> = getItemList().keys.toList()
